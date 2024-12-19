@@ -24,7 +24,7 @@ class RoomifyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.signUpScreen,
+        initialRoute: Routes.createRoomScreen,
       ),
     );
   }

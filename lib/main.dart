@@ -7,7 +7,6 @@ import 'core/helpers/shared_pref_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // To fix texts being hidden bug in flutter_screenutil in release mode.
   await ScreenUtil.ensureScreenSize();
   await SharedPrefHelper.init();
   runApp( RoomifyApp(appRouter: AppRouter(),));
