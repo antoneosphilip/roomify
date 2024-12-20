@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 
 class CircleWidget extends StatefulWidget {
   @override
@@ -9,37 +10,39 @@ class _CircleWidgetState extends State<CircleWidget> with SingleTickerProviderSt
   late AnimationController _controller;
   late Animation<double> _xAnimation, _yAnimation;
   late int _currentStep;
-  late Color _currentColor;
 
-  // النقاط المتوسطة مع عكس الاتجاهات
+  // Define colors with opacity
+  final List<Color> colors = [
+    Color(0xFFCC46A4),  // CC46A4
+    Color(0xFFCCC146),  // CCC146
+    Color(0xFFCC4646),  // CC4646
+    Color(0xFF9EACCE),  // 9EACCE
+  ];
+
   final List<Offset> _path = [
-    Offset(0.5, 1.0), // منتصف الحافة السفلى
-    Offset(0.0, 0.5), // منتصف الحافة اليسرى
-    Offset(0.5, 0.0), // منتصف الحافة العليا
-    Offset(1.0, 0.5), // منتصف الحافة اليمنى
+    Offset(0.5, 1.0),  // Bottom
+    Offset(0.0, 0.5),  // Left
+    Offset(0.5, 0.0),  // Top
+    Offset(1.0, 0.5),  // Right
   ];
 
   @override
   void initState() {
     super.initState();
     _currentStep = 0;
-    _currentColor = Colors.purple; // بداية اللون الموڤ
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final size = MediaQuery.of(context).size;
 
     _controller = AnimationController(
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 7),  // Duration of the animation
       vsync: this,
     )..addListener(() {
       if (mounted) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          setState(() {});
-        });
+        setState(() {});
       }
     });
 
@@ -62,6 +65,12 @@ class _CircleWidgetState extends State<CircleWidget> with SingleTickerProviderSt
     super.dispose();
   }
 
+  Color getColorForPosition() {
+    final currentColor = colors[_currentStep];
+    final nextColor = colors[(_currentStep + 1) % 4];
+    return Color.lerp(currentColor, nextColor, _controller.value) ?? currentColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -72,6 +81,7 @@ class _CircleWidgetState extends State<CircleWidget> with SingleTickerProviderSt
             setState(() {
               _currentStep = (_currentStep + 1) % 4;
               final size = MediaQuery.of(context).size;
+
               _xAnimation = Tween<double>(
                 begin: _path[_currentStep].dx * size.width,
                 end: _path[(_currentStep + 1) % 4].dx * size.width,
@@ -88,44 +98,13 @@ class _CircleWidgetState extends State<CircleWidget> with SingleTickerProviderSt
           });
         }
 
-        // حساب النسبة المئوية للحركة عبر المسار الكامل
-        double progress = _controller.value + _currentStep; // النسبة الإجمالية للحركة على المسار
-        double normalizedProgress = (progress % 4) / 4;
-
-        // تحديد اللون بناءً على النسبة
-        if (normalizedProgress < 0.25) {
-          _currentColor = Color.lerp(
-            Colors.purple,
-            Colors.yellow,
-            normalizedProgress * 4,
-          )!;
-        } else if (normalizedProgress < 0.5) {
-          _currentColor = Color.lerp(
-            Colors.yellow,
-            Colors.orange,
-            (normalizedProgress - 0.25) * 4,
-          )!;
-        } else if (normalizedProgress < 0.75) {
-          _currentColor = Color.lerp(
-            Colors.orange,
-            Colors.deepPurple,
-            (normalizedProgress - 0.5) * 4,
-          )!;
-        } else {
-          _currentColor = Color.lerp(
-            Colors.deepPurple,
-            Colors.purple,
-            (normalizedProgress - 0.75) * 4,
-          )!;
-        }
-
         return CustomPaint(
+          size: Size.infinite,
           painter: MovingShapePainter(
             _xAnimation.value,
             _yAnimation.value,
-            _currentColor,
+            getColorForPosition(),
           ),
-          child: Container(),
         );
       },
     );
@@ -135,28 +114,34 @@ class _CircleWidgetState extends State<CircleWidget> with SingleTickerProviderSt
 class MovingShapePainter extends CustomPainter {
   final double x;
   final double y;
-  final Color shapeColor;
+  final Color color;
 
-  MovingShapePainter(this.x, this.y, this.shapeColor);
+  MovingShapePainter(this.x, this.y, this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Apply blur effect
+    canvas.saveLayer(null, Paint()..imageFilter = ui.ImageFilter.blur(sigmaX: 15, sigmaY: 15));
+
     final Paint paint = Paint()
       ..shader = RadialGradient(
         colors: [
-          shapeColor.withOpacity(0.6), // المركز
-          shapeColor.withOpacity(0.2), // التدرج
-          Colors.transparent, // الحواف
+          color.withOpacity(0.5),  // 50% opacity
+          color.withOpacity(0.25),
+          Colors.transparent,
         ],
         stops: [0.3, 0.6, 1.0],
-      ).createShader(Rect.fromCircle(center: Offset(x, y), radius: 100))
+      ).createShader(Rect.fromCircle(center: Offset(x, y), radius: 120))  // Increased radius to 120
       ..style = PaintingStyle.fill;
 
-    canvas.drawCircle(Offset(x, y), 100, paint);
+    canvas.drawCircle(Offset(x, y), 120, paint);  // Increased radius to 120
+    canvas.restore();
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
+  bool shouldRepaint(MovingShapePainter oldDelegate) {
+    return x != oldDelegate.x ||
+        y != oldDelegate.y ||
+        color != oldDelegate.color;
   }
 }
