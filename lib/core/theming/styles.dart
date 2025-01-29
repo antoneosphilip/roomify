@@ -10,5 +10,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: Colors.black,
   );
+  static TextStyle font14WhiteRegular = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: Colors.white,
+  );
+
 
 }

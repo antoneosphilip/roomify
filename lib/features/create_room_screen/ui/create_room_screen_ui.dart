@@ -1,8 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rommify_app/core/theming/colors.dart';
 import 'package:rommify_app/features/create_room_screen/ui/widget/circle_widget.dart';
+import 'package:rommify_app/features/create_room_screen/ui/widget/custom_generate_container.dart';
+import 'package:rommify_app/features/create_room_screen/ui/widget/room_type_item.dart';
+import 'package:rommify_app/features/create_room_screen/ui/widget/room_type_list_view.dart';
+
+import '../../../core/theming/styles.dart';
 
 class CreateRoomScreen extends StatelessWidget {
   const CreateRoomScreen({super.key});
@@ -13,85 +17,143 @@ class CreateRoomScreen extends StatelessWidget {
         backgroundColor: ColorsManager.colorPrimary,
         body: Stack(
           children: [
-            Column(
+          Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          SizedBox(
+          height: 60.h,
+        ),
+        Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: 180.h,),
-                Center(
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          // Transparent background
-                          borderRadius:
-                              BorderRadius.only(
-                                topLeft: Radius.circular(20.r),
-                                topRight: Radius.circular(20.r)
-                              ), // Rounded corners
-                        ),
-                        child:  Padding(
-                          padding: EdgeInsets.only(bottom: 180.h,top: 30.h,right: 30.w,left: 30.w),
-                          child:  Text(
-                            "Ex: create a room with warm\nmood, modern furniture, classic\n brown carpet and wall clock.",
-                            style: TextStyle(
-                              color: Colors.white, // Text color
-                              fontSize: 14.sp, // Font size
-                              fontWeight: FontWeight.w100,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 30.h,),
-                          // Placeholder for bottom sections (e.g., buttons or icons)
-                          Container(
-                            width: 125.w,
-                            height: 80.h,
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                // Transparent box
-                                borderRadius:BorderRadiusDirectional.only(
-                                  topStart: Radius.circular(0.r),
-                                  bottomStart: Radius.circular(20.r),
-                                  topEnd: Radius.circular(20.r),
-                                  bottomEnd: Radius.circular(20.r),
-                                )
-                      
-                            ),
-                          ),
-                          SizedBox(width: 10.w,),
-                          Container(
-                            width: 125.w,
-                            height: 80.h,
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                // Transparent box
-                                borderRadius:BorderRadiusDirectional.only(
-                                  topStart: Radius.circular(20.r),
-                                  bottomStart: Radius.circular(20.r),
-                                  topEnd: Radius.circular(0.r),
-                                  bottomEnd: Radius.circular(20.r),
-                                )
-                      
-                            ),
-                          ),
-                      
-                        ],
-                      ),
-
-                    ],
+                Container(
+                  width: double.infinity,
+                  height: 180,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    // Transparent background
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.r),
+                        topRight:
+                        Radius.circular(20.r)), // Rounded corners
                   ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 20.h, left: 8.w, right: 8.w),
+                    child: Text(
+                      "put this wall clock on the wall of room image above the sofa,fit it with with light and shadow of room image",
+                      style: TextStyles.font14WhiteRegular.copyWith(fontSize: 16.sp,fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    // Placeholder for bottom sections (e.g., buttons or icons)
+                    Expanded(
+                      child: CustomGenerateContainer(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(24.r)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    const Expanded(
+                      child: CustomGenerateContainer(),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Column(
+                      children: [
+                        const CustomGenerateContainer(
+                            width: 80, height: 26.5),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        const CustomGenerateContainer(
+                          width: 80,
+                          height: 26.5,
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        CustomGenerateContainer(
+                          width: 80,
+                          height: 26.5,
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(16.r)),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),
+          ),
+        ),
+        SizedBox(
+          height: 50.h,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text("room type", style: TextStyles.font14WhiteRegular),
+              SizedBox(
+                height: 3.h,
+              ),
+              const RoomTypeListView(),
+              SizedBox(
+                height: 20.h,
+              ),
+              Text("result style", style: TextStyles.font14WhiteRegular),
+              SizedBox(
+                height: 3.h,
+              ),
+              const RoomTypeListView(),
+              SizedBox(height: 50.h,),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Define what happens when the button is pressed
+                    print("Purple button pressed!");
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorsManager.mainBurble,
+                    // Set the button color to purple
+                    padding: EdgeInsets.symmetric(horizontal: 55.w, vertical: 15.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32), // Rounded corners
+                    ),
+                  ), child: Text(
+                  'GENERATE',
+                  style:TextStyles.font21BlackSemiBold.copyWith(color: Colors.white,fontSize: 18.sp)
+                ),
+                ),
+              ),
 
-            CircleWidget(),
+                ],
+              ),
+              )
+            ],
+          ),
+          CircleWidget(),
           ],
         ));
   }
