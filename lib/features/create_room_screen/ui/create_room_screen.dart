@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:rommify_app/core/helpers/extensions.dart';
+import 'package:rommify_app/core/routing/app_router.dart';
 import 'package:rommify_app/core/theming/colors.dart';
 import 'package:rommify_app/features/create_room_screen/ui/widget/circle_widget.dart';
 import 'package:rommify_app/features/create_room_screen/ui/widget/custom_generate_container.dart';
 import 'package:rommify_app/features/create_room_screen/ui/widget/room_type_list_view.dart';
 
+import '../../../core/routing/routes.dart';
 import '../../../core/theming/styles.dart';
 
 class CreateRoomScreen extends StatelessWidget {
@@ -16,6 +19,7 @@ class CreateRoomScreen extends StatelessWidget {
         backgroundColor: ColorsManager.colorPrimary,
         body: Stack(
           children: [
+            CircleWidget(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,7 +42,7 @@ class CreateRoomScreen extends StatelessWidget {
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20.r),
                                 topRight:
-                                    Radius.circular(20.r)), // Rounded corners
+                                Radius.circular(20.r)), // Rounded corners
                           ),
                           child: Padding(
                             padding: EdgeInsets.only(
@@ -87,30 +91,30 @@ class CreateRoomScreen extends StatelessWidget {
                             Column(
                               children: [
                                 CustomGenerateContainer(
-                                  width: 80,
-                                  height: 26.5,
-                                  text: 'legnth(cm)',
-                                  style: TextStyles.font12GreyLight
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                 CustomGenerateContainer(
-                                  width: 80,
-                                  height: 26.5,
-                                   text: 'legnth(cm)',
-                                   style: TextStyles.font12GreyLight
+                                    width: 80,
+                                    height: 26.5,
+                                    text: 'legnth(cm)',
+                                    style: TextStyles.font12GreyLight
                                 ),
                                 SizedBox(
                                   height: 5.h,
                                 ),
                                 CustomGenerateContainer(
-                                  width: 80,
-                                  height: 26.5,
-                                  borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(16.r)),
-                                  text: 'legnth(cm)',
-                                  style: TextStyles.font12GreyLight
+                                    width: 80,
+                                    height: 26.5,
+                                    text: 'legnth(cm)',
+                                    style: TextStyles.font12GreyLight
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                CustomGenerateContainer(
+                                    width: 80,
+                                    height: 26.5,
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(16.r)),
+                                    text: 'legnth(cm)',
+                                    style: TextStyles.font12GreyLight
                                 ),
                               ],
                             )
@@ -129,7 +133,14 @@ class CreateRoomScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("room type", style: TextStyles.font14WhiteRegular),
+                      InkWell
+                        (
+
+                          child: Text("room type", style: TextStyles.font14WhiteRegular),
+                      onTap: () {
+                        context.pushNamed(Routes.exploreScreen);
+                      },
+                      ),
                       SizedBox(
                         height: 3.h,
                       ),
@@ -149,17 +160,20 @@ class CreateRoomScreen extends StatelessWidget {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            // Define what happens when the button is pressed
                             print("Purple button pressed!");
+
+
+                            context.pushNamed(Routes.generateRoomScreen);
+                            // Define what happens when the button is pressed
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorsManager.mainBurble,
                             // Set the button color to purple
                             padding: EdgeInsets.symmetric(
-                                horizontal: 55.w, vertical: 15.h),
+                                horizontal: 100.w, vertical: 15.h),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(32), // Rounded corners
+                              BorderRadius.circular(32), // Rounded corners
                             ),
                           ),
                           child: Text('GENERATE',
@@ -172,7 +186,7 @@ class CreateRoomScreen extends StatelessWidget {
                 )
               ],
             ),
-            CircleWidget(),
+
           ],
         ));
   }

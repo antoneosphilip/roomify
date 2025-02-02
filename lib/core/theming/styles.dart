@@ -15,6 +15,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.medium,
     color: Colors.white,
   );
+  static TextStyle font15WhiteRegular = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: Colors.white,
+  );
   static TextStyle font12GreyLight = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.thin,
@@ -24,6 +29,16 @@ class TextStyles {
   static TextStyle font18WhiteRegular = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeightHelper.semiBold,
+    color: Colors.white,
+  );
+  static TextStyle font19WhiteBold = TextStyle(
+    fontSize: 19.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: Colors.white,
+  );
+  static TextStyle font24WhiteExtraBold= TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeightHelper.extraBold,
     color: Colors.white,
   );
 }

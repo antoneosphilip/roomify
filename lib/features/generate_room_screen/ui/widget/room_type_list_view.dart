@@ -10,7 +10,6 @@ class RoomTypeListView extends StatelessWidget {
     return  SizedBox(
       height: 100.h,
       child: ListView.separated(
-
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return const RoomTypeItem();
@@ -20,7 +19,7 @@ class RoomTypeListView extends StatelessWidget {
               width: 10.w,
             );
           },
-          itemCount: 7),
+          itemCount: 5),
     )
     ;
   }
