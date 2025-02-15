@@ -11,5 +11,3 @@ void main() async {
   await SharedPrefHelper.init();
   runApp( RoomifyApp(appRouter: AppRouter(),));
 }
-
-

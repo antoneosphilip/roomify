@@ -17,11 +17,13 @@ class RoomifyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'RoomifyApp',
         theme: ThemeData(
-          // primaryColor: ColorsManager.white,
-          // scaffoldBackgroundColor: ColorsManager.white,
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          // useMaterial3: true,
-        ),
+
+            // primaryColor: ColorsManager.white,
+            // scaffoldBackgroundColor: ColorsManager.white,
+            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            // useMaterial3: true,
+
+            ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: appRouter.generateRoute,
         initialRoute: Routes.createRoomScreen,
