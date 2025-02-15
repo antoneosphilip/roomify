@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,4 +10,9 @@ class TextStyles {
     color: Colors.black,
   );
 
+  static TextStyle font32WhiteInter = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w800,
+    color: Colors.white,
+  );
 }

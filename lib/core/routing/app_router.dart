@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:rommify_app/core/routing/routes.dart';
 import 'package:rommify_app/features/sign_up/ui/sign_up_screen.dart';
-
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -13,7 +11,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SignUpScreen(),
         );
-
 
       default:
         return null;
