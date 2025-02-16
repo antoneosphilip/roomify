@@ -9,7 +9,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await SharedPrefHelper.init();
-  runApp(RoomifyApp(
-    appRouter: AppRouter(),
-  ));
+  runApp( RoomifyApp(appRouter: AppRouter(),));
 }

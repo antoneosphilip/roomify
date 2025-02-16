@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorsManager {
+  static const Color colorPrimary = Color(0xFF150118);
   static const Color mainColor = Color(0xFF150118);
   static const Color mainBurble = Color(0xFF771F98);
   static const Color white = Color(0xffffffff);
@@ -17,4 +18,5 @@ class ColorsManager {
   static const Color secondWhite = Color(0xffF8F8F8);
   static const Color secondGrey = Color(0xff8D8D8D);
   static const Color deepGrey = Color(0xff8C8C8C);
+
 }
