@@ -8,7 +8,7 @@ class RoomTypeListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      height: 100.h,
+      height: 76.h,
       child: ListView.separated(
 
           scrollDirection: Axis.horizontal,

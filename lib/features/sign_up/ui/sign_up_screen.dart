@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:rommify_app/core/helpers/extensions.dart';
+import 'package:rommify_app/core/routing/app_router.dart';
+import 'package:rommify_app/core/routing/routes.dart';
 import 'package:rommify_app/core/theming/colors.dart';
 import 'package:rommify_app/core/widgets/animated_bottom_right.dart';
 import 'package:rommify_app/core/widgets/animated_text_widget.dart';
@@ -74,7 +77,9 @@ class SignUpScreen extends StatelessWidget {
                   Center(
                       child: ColorChangingButton(
                     buttonText: "Sign Up",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(Routes.navBar);
+                    },
                   ))
                 ],
               ),

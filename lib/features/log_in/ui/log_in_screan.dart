@@ -10,14 +10,6 @@ import 'package:rommify_app/core/widgets/or_driver.dart';
 import 'package:rommify_app/features/log_in/ui/widget/don/dont_have_account.dart';
 import 'package:rommify_app/features/profile/profile.dart';
 
-
-
-
-
-
-
-
-
 class LogInScrean extends StatelessWidget {
   const LogInScrean({super.key});
 
@@ -28,7 +20,7 @@ class LogInScrean extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            StaticGradientBeam(),
+            const StaticGradientBeam(),
             SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,13 +29,7 @@ class LogInScrean extends StatelessWidget {
                     padding: EdgeInsets.only(left: 157.w, top: 50.h),
                     child: const AnimatedText(text: 'Log In'),
                   ),
-
-                 SingupRichText(
-
-                  ),
-                 
-
-              
+                  const SingupRichText(),
                   SizedBox(height: 44.h),
                   Center(child: GoogleIcon()),
                   SizedBox(height: 47.42.h),
@@ -52,7 +38,7 @@ class LogInScrean extends StatelessWidget {
                   SizedBox(height: 18.h),
                   CustomTextFormField(
                     labelText: 'Email',
-                    controller: TextEditingController(),
+                      controller: TextEditingController(),
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -68,7 +54,10 @@ class LogInScrean extends StatelessWidget {
                       child: ColorChangingButton(
                     buttonText: "Log In",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileScreen()));
                     },
                   ))
                 ],

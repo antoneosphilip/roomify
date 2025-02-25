@@ -18,5 +18,8 @@ class ColorsManager {
   static const Color secondWhite = Color(0xffF8F8F8);
   static const Color secondGrey = Color(0xff8D8D8D);
   static const Color deepGrey = Color(0xff8C8C8C);
+  static const Color colorCircle = Color(0xff9C00B9);
+  static const Color colorIcon = Color(0xff9747FF);
+  static final Color colorContainer = Colors.white.withOpacity(0.1);
 
 }

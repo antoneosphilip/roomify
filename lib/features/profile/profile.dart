@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rommify_app/core/theming/colors.dart';
+
+import '../../core/widgets/custom_gird_view.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -8,8 +11,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? selectedIcon;
-  List<bool> isExpandedList =
-      List.generate(10, (index) => false); // Initialize list with false
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 // Image and info row
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
@@ -64,52 +66,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 // Interactive icons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _buildIcon(Icons.favorite, 'favorite', () {}),
-                    SizedBox(width: 30),
+                    SizedBox(width: 30.w),
                     _buildIcon(Icons.history, 'history', () {}),
-                    SizedBox(width: 30),
+                    SizedBox(width: 30.w),
                     _buildIcon(Icons.bookmark, 'bookmark', () {}),
                   ],
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 // Image Grid - Modified mainAxisSpacing to 0
-                Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 15, // Changed from previous value to 0
-                      childAspectRatio: 169 / 128, // Set the aspect ratio
-                    ),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return ImageCard(
-                        imageUrl: 'assets/images/Group 25.png',
-                        profileImageUrl: 'assets/images/1O0A0210.jpg',
-                        onExpand: () {
-                          setState(() {
-                            isExpandedList[index] = !isExpandedList[index];
-                          });
-                        },
-                        isExpanded: isExpandedList[index],
-                      );
-                    },
-                  ),
+                const Expanded(
+                  child: CustomGirdView(),
                 ),
               ],
             ),
           ),
           // Settings icon at the top
           Positioned(
-            top: 25,
-            right: 10,
-            child: Icon(Icons.settings, color: Colors.white, size: 28),
+            top: 25.h,
+            right: 10.w,
+            child: Icon(Icons.settings, color: Colors.white, size: 28.sp),
           ),
         ],
       ),
@@ -192,18 +173,17 @@ class ImageCard extends StatelessWidget {
                     ],
                   ),
                 Container(
-                 
                   decoration: BoxDecoration(
                     shape: BoxShape.circle, 
                     border: Border.all(
-                      color: Colors.grey, 
-                      width: 3, 
+                      color: Colors.white,
+                      width: 2,
                     ),
                   ),
                   child: const Icon(
                     Icons.more_horiz,
                     color: Colors.white, 
-                    size: 24, 
+                    size: 14,
                   ),
                 )
               ],
